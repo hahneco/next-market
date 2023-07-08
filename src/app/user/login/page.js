@@ -4,8 +4,12 @@ import { useState } from "react"
 
 
 const Login = () => {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+  const [newUser, setNewUser] = useState({
+    email: "",
+    password: "",
+  })
+  // const [email, setEmail] = useState("")
+  // const [password, setPassword] = useState("")
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -16,10 +20,7 @@ const Login = () => {
            "Accept": "application/json", // JSON形式でデータ送信
            "Content-Type": "application/json" // JSON形式でデータ送信
         },
-        body: JSON.stringify({
-        email: email,
-        password: password
-        })
+        body: JSON.stringify(newUser) // 送信したいデータ
      })
       const jsonData = await response.json()
       // console.log(jsonData)
@@ -30,22 +31,29 @@ const Login = () => {
     }
   }
 
+  const handleChange = (e) => {
+    setNewUser({
+      ...newUser,
+      [e.target.name]: e.target.value,
+    })
+  }
+
   return (
     <div>
       <h1>ログイン</h1>
 
       <form onSubmit={handleSubmit}>
         <input
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={newUser.email}
+          onChange={handleChange}
           type="text"
           name="email"
           placeholder="メールアドレス"
           required
          />
         <input
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={newUser.password}
+          onChange={handleChange}
           type="text"
           name="password"
           placeholder="パスワード"
