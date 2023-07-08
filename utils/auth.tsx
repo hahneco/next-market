@@ -22,7 +22,7 @@ const auth = (handler:any) => { // createItemとかdeleteItemとかを受け取�
       return handler(req, res) // 処理を止める
     }
 
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvQG1vbm90YWluLmNvbSIsImlhdCI6MTY4ODc4MDY5NSwiZXhwIjoxNjg4ODYzNDk1fQ.GhOiAbvP4ooP9oLV--ByORD272Ve7mA5nqrePauzuGQ"
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhlbGxvNUBtb25vdGFpbi5jb20iLCJpYXQiOjE2ODg3OTkyMzYsImV4cCI6MTY4ODg4MjAzNn0.BZq5r2-NkaKGAUC2k13KU-itGd0m2SK-TavGbfJnHuU"
     // const token = await req.headers.authorization.split(" ")[1]
 
     // トークンがない場合
