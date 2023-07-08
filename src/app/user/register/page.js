@@ -1,3 +1,4 @@
+'use client'
 // 新しいユーザ登録用
 
 // import { headers } from "next/dist/client/components/headers";
