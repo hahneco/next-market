@@ -15,7 +15,7 @@ const ReadAllItems: NextPage = () => {
 
   // getServerSidePropでうまくfetchできないので、一旦useEffectを使って実装する
   const getItems = useCallback(async () => {
-    const response = await fetch("http://localhost:3000/api/item/readall");
+    const response = await fetch("https://next-market-lime.vercel.app/api/item/readall");
     const allItems = await response.json();
     console.log(allItems.allItems)
     setItems(allItems.allItems)
@@ -54,7 +54,7 @@ const ReadAllItems: NextPage = () => {
 export default ReadAllItems
 
 // export const getServerSideProps: GetServerSideProps<ReadAllDataType>  = async() => {
-//   const response = await fetch("http://localhost:3000/api/item/readall")
+//   const response = await fetch("https://next-market-lime.vercel.app/api/item/readall")
 //   const allItems = await response.json()
 //   return {
 //     props: allItems

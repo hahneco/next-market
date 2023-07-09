@@ -15,7 +15,7 @@ const DeleteItem: NextPage<ReadSingleDataType> = (props) => {
     e.preventDefault()
 
     try {
-      const response = await fetch(`http://localhost:3000/api/item/delete/${props.singleItem._id}`, {
+      const response = await fetch(`https://next-market-lime.vercel.app/api/item/delete/${props.singleItem._id}`, {
         method: "DELETE",
         headers: {
           "Accept": "application/json",
@@ -64,7 +64,7 @@ export default DeleteItem
 export const getServerSideProps: GetServerSideProps<ReadSingleDataType> = async (context) => {
   const itemId = context.query.id; // queryパラメータから`id`を取得
 
-  const response = await fetch(`http://localhost:3000/api/item/${itemId}`);
+  const response = await fetch(`https://next-market-lime.vercel.app/api/item/${itemId}`);
   const singleItem = await response.json();
 
   return {
