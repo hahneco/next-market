@@ -33,10 +33,10 @@ const Login: NextPage = () => {
     }
   }
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.FormEvent<HTMLFormElement>) => {
     setNewUser({
       ...newUser,
-      [e.target.name]: e.target.value,
+      [e.currentTarget.name]: e.currentTarget.value, // 型アサーション
     })
   }
 
