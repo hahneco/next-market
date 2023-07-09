@@ -47,7 +47,7 @@ export default ReadSingleItem;
 export const getServerSideProps = async (context) => {
   const itemId = context.query.id; // queryパラメータから`id`を取得
 
-  const response = await fetch(`http://localhost:3000/api/item/${itemId}`);
+  const response = await fetch(`https://next-market-lime.vercel.app//api/item/${itemId}`);
   const singleItem = await response.json();
 
   // console.log(context);
