@@ -2,6 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import '../../../src/app/globals.css'
+import Head from "next/head";
+import { Layout } from "../layout";
 
 
 const ReadSingleItem = (props) => {
@@ -9,27 +12,33 @@ const ReadSingleItem = (props) => {
   console.log(props);
 
   return (
-    <div>
-      <div>
-        <Image src={`/${props.singleItem.image}`} width="750" height="800" alt="item-image" />
+    <Layout>
+      <div className="grid-container-si">
+        <Head>
+          <title>{props.singleItem.title}</title>
+        </Head>
+
         <div>
-          <h1>{props.singleItem.title}</h1>
-          <h2>{props.singleItem.price}</h2>
-          <hr />
-          <p>{props.singleItem.description}</p>
-
+          <Image src={`/${props.singleItem.image}`} width="750" height="500" alt="item-image" />
           <div>
-            <Link href={`/item/update/${props.singleItem._id}`} >
-              アイテム編集
-            </Link>
+            <h1>{props.singleItem.title}</h1>
+            <h2>{props.singleItem.price}</h2>
+            <hr />
+            <p>{props.singleItem.description}</p>
 
-            <Link href={`/item/delete/${props.singleItem._id}`} >
-              アイテム削除
-            </Link>
+            <div>
+              <Link href={`/item/update/${props.singleItem._id}`} >
+                アイテム編集
+              </Link>
+
+              <Link href={`/item/delete/${props.singleItem._id}`} >
+                アイテム削除
+              </Link>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </Layout>
   )
 };
 

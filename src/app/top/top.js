@@ -4,8 +4,6 @@ import ReadAllItems from './readAllItems/readAllItems'
 
 
 const Top = () => {
-  console.log()
-
   return (
     <div>
       <ReadAllItems />

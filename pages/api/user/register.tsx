@@ -1,7 +1,6 @@
 import type { NextApiResponse } from "next";
 import connectDB from "../../../utils/database"
 import { UserModel } from "../../../utils/schemaModels"
-// import { Request, Response } from 'express';
 import { ExtendNextApiRequestUser, ResMessageType } from "../../../utils/types";
 
 

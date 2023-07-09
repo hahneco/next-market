@@ -45,7 +45,9 @@ const Register = () => {
 
   return (
     <div>
-      <Head><title>ユーザー登録</title></Head>
+      <Head>
+        <title>ユーザー登録</title>
+      </Head>
       <h1 className="page-title">ユーザー登録</h1>
 
       {/* HTMLでのデータ送信は⇩これだった。。 */}

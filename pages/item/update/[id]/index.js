@@ -1,5 +1,7 @@
 import { useState } from "react"
 import useAuth from "../../../../utils/useAuth"
+import Head from "next/head"
+import { Layout } from "../../layout"
 
 const UpdateItem = (props) => {
   const [title, setTitle] = useState(props.singleItem.title)
@@ -37,44 +39,49 @@ const UpdateItem = (props) => {
 
   if (loginUser === props.singleItem.email) {
     return (
-      <div>
-        <h1>アイテム編集</h1>
+      <Layout>
+        <div>
+          <Head>
+            <title>アイテム編集</title>
+          </Head>
+          <h1 className="page-title">アイテム編集</h1>
 
-        <form action="" onSubmit={handleSubmit}>
-          <input
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            type="text"
-            name="title"
-            placeholder="アイテム名"
-            required
-          />
-          <input
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-            type="text"
-            name="price"
-            placeholder="価格"
-            required
-          />
-          <input
-            value={image}
-            onChange={(e) => setImage(e.target.value)}
-            type="text"
-            name="image"
-            placeholder="画像"
-            required
-          />
-          <textarea
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            name="description"
-            rows={15}
-            placeholder="商品説明"
-            required></textarea>
-          <button>編集</button>
-        </form>
-      </div>
+          <form action="" onSubmit={handleSubmit}>
+            <input
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              type="text"
+              name="title"
+              placeholder="アイテム名"
+              required
+            />
+            <input
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+              type="text"
+              name="price"
+              placeholder="価格"
+              required
+            />
+            <input
+              value={image}
+              onChange={(e) => setImage(e.target.value)}
+              type="text"
+              name="image"
+              placeholder="画像"
+              required
+            />
+            <textarea
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              name="description"
+              rows={15}
+              placeholder="商品説明"
+              required></textarea>
+            <button>編集</button>
+          </form>
+        </div>
+      </Layout>
     )
   } else {
     return <h1>権限がありません</h1>

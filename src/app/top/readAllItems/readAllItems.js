@@ -1,5 +1,6 @@
 'use client'
 
+import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
@@ -23,18 +24,24 @@ const ReadAllItems = () => {
   }, [getItems])
 
   return (
-    <div>
+    <div className="container">
+      <Head>
+        <title>Next Market</title>
+      </Head>
+
       {items.map(item => {
         return (
-          <Link href={`/item/${item._id}`} key={item._id}>
+          <Link href={`/item/${item._id}`} key={item._id} className="card">
             <Image
               src={`/${item.image}`}
               width="750"
               height="500"
               alt="item-image" />
+            <div className="texts-area">
             <h2>¥{item.price}</h2>
-            <h2>{item.title}</h2>
-            <h2>{item.description.substring(0, 80)}...</h2>
+            <h3>{item.title}</h3>
+            <p>{item.description.substring(0, 80)}...</p>
+            </div>
           </Link>
         )
       })}

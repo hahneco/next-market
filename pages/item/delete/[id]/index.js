@@ -1,5 +1,8 @@
 import Image from "next/image"
 import useAuth from "../../../../utils/useAuth"
+import '../../../../src/app/globals.css'
+import Head from "next/head"
+import { Layout } from "../../layout"
 
 const DeleteItem = (props) => {
   console.log(props.singleItem)
@@ -28,18 +31,23 @@ const DeleteItem = (props) => {
 
   if (loginUser === props.singleItem.email) {
     return (
-      <div>
-        <h1>アイテム削除</h1>
+      <Layout>
+        <div className="delete-page">
+          <Head>
+            <title>アイテム削除</title>
+          </Head>
+          <h1 className="page-title">アイテム削除</h1>
 
-        <form action="" onSubmit={handleSubmit}>
-          <h2>{props.singleItem.title}</h2>
-          <Image src={`/${props.singleItem.image}`} width={750} height={500} alt="item-image" />
-          <h3>¥{props.singleItem.price}</h3>
-          <p>{props.singleItem.description}</p>
+          <form action="" onSubmit={handleSubmit}>
+            <h2>{props.singleItem.title}</h2>
+            <Image src={`/${props.singleItem.image}`} width={750} height={500} alt="item-image" />
+            <h3>¥{props.singleItem.price}</h3>
+            <p>{props.singleItem.description}</p>
 
-          <button>削除</button>
-        </form>
-      </div>
+            <button>削除</button>
+          </form>
+        </div>
+      </Layout>
     )
   } else {
     return <h1>権限がありません</h1>
