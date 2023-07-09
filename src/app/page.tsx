@@ -1,10 +1,8 @@
-import Image from 'next/image'
-
+import Top from './top/top'
 
 export default function Home() {
+
   return (
-    <main>
-      index
-    </main>
+    <Top />
   )
 }
