@@ -1,4 +1,5 @@
 import { useState } from "react"
+import useAuth from "../../../../utils/useAuth"
 
 const UpdateItem = (props) => {
   const [title, setTitle] = useState(props.singleItem.title)
@@ -25,53 +26,59 @@ const UpdateItem = (props) => {
         })
       })
       const jsonData = await response.json()
-      console.log(jsonData)
+      // console.log(jsonData)
       alert(jsonData.message)
     } catch (err) {
       alert("アイテム編集失敗")
     }
   }
 
-  return (
-    <div>
-      <h1>アイテム編集</h1>
+  const loginUser = useAuth()
 
-      <form action="" onSubmit={handleSubmit}>
-        <input
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          type="text"
-          name="title"
-          placeholder="アイテム名"
-          required
-        />
-        <input
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-          type="text"
-          name="price"
-          placeholder="価格"
-          required
-        />
-        <input
-          value={image}
-          onChange={(e) => setImage(e.target.value)}
-          type="text"
-          name="image"
-          placeholder="画像"
-          required
-        />
-        <textarea
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          name="description"
-          rows={15}
-          placeholder="商品説明"
-          required></textarea>
-        <button>編集</button>
-      </form>
-    </div>
-  )
+  if (loginUser === props.singleItem.email) {
+    return (
+      <div>
+        <h1>アイテム編集</h1>
+
+        <form action="" onSubmit={handleSubmit}>
+          <input
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            type="text"
+            name="title"
+            placeholder="アイテム名"
+            required
+          />
+          <input
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+            type="text"
+            name="price"
+            placeholder="価格"
+            required
+          />
+          <input
+            value={image}
+            onChange={(e) => setImage(e.target.value)}
+            type="text"
+            name="image"
+            placeholder="画像"
+            required
+          />
+          <textarea
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            name="description"
+            rows={15}
+            placeholder="商品説明"
+            required></textarea>
+          <button>編集</button>
+        </form>
+      </div>
+    )
+  } else {
+    return <h1>権限がありません</h1>
+  }
 }
 
 export default UpdateItem
@@ -81,8 +88,6 @@ export const getServerSideProps = async (context) => {
 
   const response = await fetch(`http://localhost:3000/api/item/${itemId}`);
   const singleItem = await response.json();
-
-  console.log(context);
 
   return {
     props: singleItem

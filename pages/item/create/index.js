@@ -2,6 +2,8 @@
 // アイテムの作成、編集、削除のリクエストはutils/auth.jsを必ず通過し、有効なトークンを持っているかチェックを受ける。
 
 import { useState } from "react"
+import useAuth from "../../../utils/useAuth"
+
 
 const CreateItem = () => {
   console.log("create")
@@ -29,15 +31,19 @@ const CreateItem = () => {
         })
       })
       const jsonData = await response.json()
-      console.log(jsonData)
+      // console.log(jsonData)
       alert(jsonData.message)
     } catch (err) {
       alert("アイテム作成失敗")
     }
   }
 
-  return (
-    <div>
+  const loginUser = useAuth()
+  // console.log(loginUser)
+
+  if (loginUser) {
+    return (
+      <div>
       <h1>アイテム作成</h1>
 
       <form action="" onSubmit={handleSubmit}>
@@ -75,7 +81,8 @@ const CreateItem = () => {
         <button>作成</button>
       </form>
     </div>
-  )
+    )
+  }
 }
 
 export default CreateItem

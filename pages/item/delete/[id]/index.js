@@ -1,4 +1,5 @@
 import Image from "next/image"
+import useAuth from "../../../../utils/useAuth"
 
 const DeleteItem = (props) => {
   console.log(props.singleItem)
@@ -16,27 +17,34 @@ const DeleteItem = (props) => {
         },
       })
       const jsonData = await response.json()
-      console.log(jsonData)
+      // console.log(jsonData)
       alert(jsonData.message)
     } catch (err) {
       alert("アイテム削除失敗")
     }
   }
 
-  return (
-    <div>
-      <h1>アイテム削除</h1>
+  const loginUser = useAuth()
 
-      <form action="" onSubmit={handleSubmit}>
-        <h2>{props.singleItem.title}</h2>
-        <Image src={`/${props.singleItem.image}`} width={750} height={500} alt="item-image" />
-        <h3>¥{props.singleItem.price}</h3>
-        <p>{props.singleItem.description}</p>
+  if (loginUser === props.singleItem.email) {
+    return (
+      <div>
+        <h1>アイテム削除</h1>
 
-        <button>削除</button>
-      </form>
-    </div>
-  )
+        <form action="" onSubmit={handleSubmit}>
+          <h2>{props.singleItem.title}</h2>
+          <Image src={`/${props.singleItem.image}`} width={750} height={500} alt="item-image" />
+          <h3>¥{props.singleItem.price}</h3>
+          <p>{props.singleItem.description}</p>
+
+          <button>削除</button>
+        </form>
+      </div>
+    )
+  } else {
+    return <h1>権限がありません</h1>
+  }
+
 }
 
 export default DeleteItem
@@ -46,8 +54,6 @@ export const getServerSideProps = async (context) => {
 
   const response = await fetch(`http://localhost:3000/api/item/${itemId}`);
   const singleItem = await response.json();
-
-  console.log(context);
 
   return {
     props: singleItem
