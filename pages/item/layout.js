@@ -3,7 +3,7 @@ import Header from "../../src/components/header";
 import "../../src/app/globals.css"
 
 
-export const Layout = ({ children }) => {
+const Layout = ({ children }) => {
   return (
     <>
       <div className="container">
@@ -16,3 +16,5 @@ export const Layout = ({ children }) => {
     </>
   );
 };
+
+export default Layout
