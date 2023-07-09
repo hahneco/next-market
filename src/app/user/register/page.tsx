@@ -3,7 +3,7 @@
 
 // import { headers } from "next/dist/client/components/headers";
 import type { NextPage } from "next"
-import { useState } from "react"
+import React, { useState } from "react"
 import Head from "next/head"
 
 
@@ -37,7 +37,7 @@ const Register: NextPage = () => {
     }
   }
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewUser({
       ...newUser,
       [e.target.name]: e.target.value,
