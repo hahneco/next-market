@@ -1,6 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next"
 import jwt from "jsonwebtoken"
-import { decode } from "punycode"
 import { DecodedType, ExtendNextApiRequestAuth, ResMessageType } from "./types"
 
 
@@ -33,7 +32,7 @@ const auth = (handler:any) => { // createItemとかdeleteItemとかを受け取�
 
     // トークンがある場合
     try {
-      const decoded = jwt.verify(token, secret_key)
+      const decoded = jwt.verify(token!, secret_key)
       // console.log(decoded)
       req.body.email = (decoded as DecodedType).email // asを使用するものを型アサーション（Type Assertion）という。
       return handler(req, res)

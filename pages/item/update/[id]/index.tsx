@@ -1,19 +1,22 @@
 import { useState } from "react"
 import useAuth from "../../../../utils/useAuth"
 import Head from "next/head"
-import { Layout } from "../../layout"
+import Layout from "../../layout"
+import { GetServerSideProps, NextPage } from "next"
+import { ReadSingleDataType } from "../../../../utils/types"
 
-const UpdateItem = (props) => {
+
+const UpdateItem: NextPage<ReadSingleDataType> = (props) => {
   const [title, setTitle] = useState(props.singleItem.title)
   const [price, setPrice] = useState(props.singleItem.price)
   const [image, setImage] = useState(props.singleItem.image)
   const [description, setDescription] = useState(props.singleItem.description)
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     try {
-      const response = await fetch(`https://next-market-lime.vercel.app//api/item/update/${props.singleItem._id}`, {
+      const response = await fetch(`https://next-market-lime.vercel.app/api/item/update/${props.singleItem._id}`, {
         method: "POST",
         headers: {
           "Accept": "application/json",
@@ -90,10 +93,10 @@ const UpdateItem = (props) => {
 
 export default UpdateItem
 
-export const getServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps<ReadSingleDataType> = async (context) => {
   const itemId = context.query.id; // queryパラメータから`id`を取得
 
-  const response = await fetch(`https://next-market-lime.vercel.app//api/item/${itemId}`);
+  const response = await fetch(`https://next-market-lime.vercel.app/api/item/${itemId}`);
   const singleItem = await response.json();
 
   return {

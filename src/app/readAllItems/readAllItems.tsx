@@ -1,19 +1,21 @@
-'use client'
-
+// import { GetServerSideProps, NextPage } from "next";
+import { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
+import { ReadAllDataType, SavedItemDataType } from "../../../utils/types";
 
 
-const ReadAllItems = () => {
+const ReadAllItems: NextPage = () => {
   console.log("レンダリング(｀・ω・´)");
+  console.log("٩( ᐛ )و")
 
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState<SavedItemDataType[]>([]);
 
   // getServerSidePropでうまくfetchできないので、一旦useEffectを使って実装する
   const getItems = useCallback(async () => {
-    const response = await fetch("https://next-market-lime.vercel.app//api/item/readall");
+    const response = await fetch("https://next-market-lime.vercel.app/api/item/readall");
     const allItems = await response.json();
     console.log(allItems.allItems)
     setItems(allItems.allItems)
@@ -29,9 +31,9 @@ const ReadAllItems = () => {
         <title>Next Market</title>
       </Head>
 
-      {items.map(item => {
+      {items.map((item, index) => {
         return (
-          <Link href={`/item/${item._id}`} key={item._id} className="card">
+          <Link href={`/item/${item._id}`} key={index} className="card">
             <Image
               src={`/${item.image}`}
               width="750"
@@ -49,4 +51,12 @@ const ReadAllItems = () => {
   );
 };
 
-export default ReadAllItems;
+export default ReadAllItems
+
+// export const getServerSideProps: GetServerSideProps<ReadAllDataType>  = async() => {
+//   const response = await fetch("https://next-market-lime.vercel.app/api/item/readall")
+//   const allItems = await response.json()
+//   return {
+//     props: allItems
+//   }
+// }

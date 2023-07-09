@@ -1,5 +1,6 @@
 import type { NextApiRequest } from "next"
 import { Types } from "mongoose"
+import { ReactNode } from "react"
 
 // schemaModels.tsx
 export interface ItemDataType {
@@ -69,3 +70,41 @@ export interface ResReadSingleType {
   message: string
   singleItem?: SavedItemDataType
 }
+
+// Frontend
+// [id].tsx, update/[id].tsx, delete/[id].tsx
+export interface ReadSingleDataType {
+  singleItem: {
+    _id: string
+    title: string
+    image: string
+    price: string
+    description: string
+    email: string
+  }
+}
+
+// index.tsx
+export interface ReadAllDataType {
+  allItems: {
+    _id: string
+    title: string
+    image: string
+    price: string
+    description: string
+    email: string
+  }[]
+}
+
+// Frontend
+// layout.tsx
+export interface Props {
+  children: ReactNode;
+}
+
+// Define the item type
+export interface ItemType {
+  _id: string;
+  image: string;
+  // Add other properties if necessary
+};

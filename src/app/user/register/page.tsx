@@ -2,11 +2,12 @@
 // 新しいユーザ登録用
 
 // import { headers } from "next/dist/client/components/headers";
-import { useState } from "react"
+import type { NextPage } from "next"
+import React, { useState } from "react"
 import Head from "next/head"
 
 
-const Register = () => {
+const Register: NextPage = () => {
   const [newUser, setNewUser] = useState({
     name: "",
     email: "",
@@ -17,10 +18,10 @@ const Register = () => {
   // const [password, setPassword] = useState(""); // データを扱うときはほぼ使う
 
   {/* Reactでのデータ送信用! */}
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault() // <form>で<button>を押して送信処理すると、デフォルでリロードされてしまう設計になっているので解除する　※(e)の中に入っている
     try { // データの送信処理は成功/失敗があるので下記のように記述
-      const response = await fetch("https://next-market-lime.vercel.app//api/user/register", {
+      const response = await fetch("https://next-market-lime.vercel.app/api/user/register", {
         method: "POST",
         headers: {
           "Accept": "application/json", // JSON形式でデータ送信
@@ -36,7 +37,7 @@ const Register = () => {
     }
   }
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewUser({
       ...newUser,
       [e.target.name]: e.target.value,
@@ -51,7 +52,7 @@ const Register = () => {
       <h1 className="page-title">ユーザー登録</h1>
 
       {/* HTMLでのデータ送信は⇩これだった。。 */}
-      {/* <form action="https://next-market-lime.vercel.app//api/user/register" method="POST"> */}
+      {/* <form action="https://next-market-lime.vercel.app/api/user/register" method="POST"> */}
 
       {/* Reactでは下記のようにデータを送信を実現する! */}
       <form onSubmit={handleSubmit}>

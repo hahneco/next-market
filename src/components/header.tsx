@@ -17,7 +17,7 @@ const Header = () => {
             <li>
               <Link href="/user/register">登録</Link>
               <Link href="/user/login">ログイン</Link>
-              <Link href="/user/create">アイテム作成</Link>
+              <Link href="/item/create">アイテム作成</Link>
             </li>
           </ul>
         </nav>

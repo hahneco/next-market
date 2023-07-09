@@ -1,23 +1,24 @@
 // ログインしているユーザのみが、アイテムの作成を行える。
 // アイテムの作成、編集、削除のリクエストはutils/auth.jsを必ず通過し、有効なトークンを持っているかチェックを受ける。
 
+import type { NextPage } from "next"
 import { useState } from "react"
 import useAuth from "../../../utils/useAuth"
-import { Layout } from "../layout"
+import Layout from "../layout"
 
 
-const CreateItem = () => {
+const CreateItem: NextPage = () => {
   console.log("create")
   const [title, setTitle] = useState("")
   const [price, setPrice] = useState("")
   const [image, setImage] = useState("")
   const [description, setDescription] = useState("")
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     try {
-      const response = await fetch("https://next-market-lime.vercel.app//api/item/create", {
+      const response = await fetch("https://next-market-lime.vercel.app/api/item/create", {
         method: "POST",
         headers: {
           "Accept": "application/json",
@@ -85,6 +86,8 @@ const CreateItem = () => {
         </div>
       </Layout>
     )
+  } else {
+    return <></>
   }
 }
 
