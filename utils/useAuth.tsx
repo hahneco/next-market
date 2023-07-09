@@ -3,6 +3,7 @@
 import jwt from "jsonwebtoken"
 import { useEffect, useState } from "react"
 import { useRouter } from "next/router"
+import { DecodedType } from "./types"
 
 
 // シークレットキー
@@ -28,8 +29,8 @@ const useAuth = () => {
     // トークンがある場合はサーバーに検証リクエストを送信
     // トークンが有効かチェックする(jwt.verify()とシークレットキーが必要。)
     try {
-      const decoded = jwt.verify(token, secret_key) // トークンを解析し、保存されたデータがdecodedに保存される。
-      setLoginUser(decoded.email)
+      const decoded = jwt.verify(token!, secret_key) // トークンを解析し、保存されたデータがdecodedに保存される。
+      setLoginUser((decoded as DecodedType).email)
     } catch (error) { // トークンが有効でない場合はログインページに行く。
       // router.push("/user/login")
       console.log("トークンが無効です");

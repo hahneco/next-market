@@ -1,10 +1,11 @@
 'use client'
 
+import type { NextPage } from "next"
 import Head from "next/head"
-import { useState } from "react"
+import React, { useState } from "react"
 
 
-const Login = () => {
+const Login: NextPage = () => {
   const [newUser, setNewUser] = useState({
     email: "",
     password: "",
@@ -12,10 +13,10 @@ const Login = () => {
   // const [email, setEmail] = useState("")
   // const [password, setPassword] = useState("")
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     try {
-     const response = await fetch("https://next-market-lime.vercel.app//api/user/login", {
+     const response = await fetch("http://localhost:3000/api/user/login", {
         method: "POST",
         headers: {
            "Accept": "application/json", // JSON形式でデータ送信
