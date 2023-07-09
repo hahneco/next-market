@@ -101,3 +101,10 @@ export interface ReadAllDataType {
 export interface Props {
   children: ReactNode;
 }
+
+// Define the item type
+export interface ItemType {
+  _id: string;
+  image: string;
+  // Add other properties if necessary
+};

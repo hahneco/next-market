@@ -1,17 +1,17 @@
-'use client'
-
+// import { GetServerSideProps, NextPage } from "next";
 import { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
-import { ReadAllDataType } from "../../../../utils/types";
+import { ReadAllDataType, SavedItemDataType } from "../../../utils/types";
 
 
-const ReadAllItems: NextPage<ReadAllDataType> = () => {
+const ReadAllItems: NextPage = () => {
   console.log("レンダリング(｀・ω・´)");
+  console.log("٩( ᐛ )و")
 
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState<SavedItemDataType[]>([]);
 
   // getServerSidePropでうまくfetchできないので、一旦useEffectを使って実装する
   const getItems = useCallback(async () => {
@@ -31,9 +31,9 @@ const ReadAllItems: NextPage<ReadAllDataType> = () => {
         <title>Next Market</title>
       </Head>
 
-      {items.map(item => {
+      {items.map((item, index) => {
         return (
-          <Link href={`/item/${item._id}`} key={item._id} className="card">
+          <Link href={`/item/${item._id}`} key={index} className="card">
             <Image
               src={`/${item.image}`}
               width="750"
@@ -51,4 +51,12 @@ const ReadAllItems: NextPage<ReadAllDataType> = () => {
   );
 };
 
-export default ReadAllItems;
+export default ReadAllItems
+
+// export const getServerSideProps: GetServerSideProps<ReadAllDataType>  = async() => {
+//   const response = await fetch("http://localhost:3000/api/item/readall")
+//   const allItems = await response.json()
+//   return {
+//     props: allItems
+//   }
+// }

@@ -1,6 +1,6 @@
 'use client'
 
-import ReadAllItems from './readAllItems/readAllItems'
+import ReadAllItems from '../readAllItems/readAllItems'
 
 
 const Top = () => {
