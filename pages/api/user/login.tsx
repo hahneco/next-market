@@ -35,7 +35,7 @@ const loginUser = async (req:ExtendNextApiRequestUser, res:NextApiResponse<ResMe
         }
         // トークンを発行する
         const token = jwt.sign(payload, secret_key, {expiresIn: "23h"})
-        console.log(token)
+        // console.log(token)
         return res.status(200).json({message: "ログイン成功", token: token})
       } else {
         return res.status(400).json({message: "ログイン失敗：パスワードが間違っています。"})

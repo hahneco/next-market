@@ -7,9 +7,14 @@ import Head from "next/head"
 
 
 const Register = () => {
-  const [name, setName] = useState(""); // データを扱うときはほぼ使う
-  const [email, setEmail] = useState(""); // データを扱うときはほぼ使う
-  const [password, setPassword] = useState(""); // データを扱うときはほぼ使う
+  const [newUser, setNewUser] = useState({
+    name: "",
+    email: "",
+    password: ""
+  })
+  // const [name, setName] = useState(""); // データを扱うときはほぼ使う
+  // const [email, setEmail] = useState(""); // データを扱うときはほぼ使う
+  // const [password, setPassword] = useState(""); // データを扱うときはほぼ使う
 
   {/* Reactでのデータ送信用! */}
   const handleSubmit = async(e) => {
@@ -21,11 +26,7 @@ const Register = () => {
           "Accept": "application/json", // JSON形式でデータ送信
           "Content-Type": "application/json" // JSON形式でデータ送信
         },
-        body: JSON.stringify({ // 送信したいデータ
-          name: name,
-          email: email,
-          password: password
-        })
+        body: JSON.stringify(newUser) // 送信したいデータ
       }) // fetch☞ 「取ってくる」「読み取る」の意味
       const jsonData = await response.json() // 送り返されるレスポンスデータは、ストリーム形式なので、JSON形式に変更する
       console.log(jsonData)
@@ -35,9 +36,18 @@ const Register = () => {
     }
   }
 
+  const handleChange = (e) => {
+    setNewUser({
+      ...newUser,
+      [e.target.name]: e.target.value,
+    })
+  }
+
   return (
     <div>
-      <Head><title>ユーザー登録</title></Head>
+      <Head>
+        <title>ユーザー登録</title>
+      </Head>
       <h1 className="page-title">ユーザー登録</h1>
 
       {/* HTMLでのデータ送信は⇩これだった。。 */}
@@ -47,25 +57,25 @@ const Register = () => {
       <form onSubmit={handleSubmit}>
 
         {/* 「required」でひとつでも空欄があるとフォームが送信できないようにする */}
-        <input value={name}
-          onChange={(e) => setName(e.target.value)
-          }
+        <input
+          value={newUser.name}
+          onChange={handleChange}
           type="text"
           name="name"
           placeholder="名前"
           required
         />
-        <input value={email}
-          onChange={(e) => setEmail(e.target.value)
-          }
+        <input
+          value={newUser.email}
+          onChange={handleChange}
           type="text"
           name="email"
           placeholder="メールアドレス"
           required
         />
-        <input value={password}
-          onChange={(e) => setPassword(e.target.value)
-          }
+        <input
+          value={newUser.password}
+          onChange={handleChange}
           type="text"
           name="password"
           placeholder="パスワード"
