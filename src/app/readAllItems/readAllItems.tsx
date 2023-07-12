@@ -1,4 +1,3 @@
-// import { GetServerSideProps, NextPage } from "next";
 import { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
@@ -14,6 +13,7 @@ const ReadAllItems: NextPage = () => {
   const [items, setItems] = useState<SavedItemDataType[]>([]);
 
   // getServerSidePropでうまくfetchできないので、一旦useEffectを使って実装する
+  // app/ディレクトリ下にファイルを置こうとしたのが原因。pages/下なら動作する
   const getItems = useCallback(async () => {
     const response = await fetch("https://next-market-lime.vercel.app/api/item/readall");
     const allItems = await response.json();
